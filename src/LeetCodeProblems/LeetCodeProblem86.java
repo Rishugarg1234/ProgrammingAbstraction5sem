@@ -1,0 +1,41 @@
+package LeetCodeProblems;
+import java.util.*;
+//LeetCode Problem 86 = Partition List
+public class LeetCodeProblem86 {
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     *     int val;
+     *     ListNode next;
+     *     ListNode() {}
+     *     ListNode(int val) { this.val = val; }
+     *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * }
+     */
+    class Solution {
+        public ListNode partition(ListNode head, int x) {
+            if(head==null||head.next==null){
+                return head;
+            }
+            ListNode smallDummy=new ListNode(0);
+            ListNode bigDummy = new ListNode(0);
+            ListNode small = smallDummy;
+            ListNode big = bigDummy;
+            ListNode curr = head;
+            while(curr!=null){
+                if(curr.val<x){
+                    small.next=curr;
+                    small=small.next;
+                }
+                else{
+                    big.next=curr;
+                    big=big.next;
+                }
+                curr=curr.next;
+            }
+            big.next=null;
+            small.next=bigDummy.next;
+            return smallDummy.next;
+        }
+    }
+}
