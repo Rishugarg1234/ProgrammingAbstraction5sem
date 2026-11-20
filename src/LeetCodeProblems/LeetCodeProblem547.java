@@ -1,0 +1,26 @@
+package LeetCodeProblems;
+//LeetCode Problem 547 : Number of Provinces
+public class LeetCodeProblem547 {
+    class Solution {
+        static void dfs(int city,int [][]isConnected,boolean []visited){
+            visited[city]=true;
+            for(int n=0;n<isConnected.length;n++){
+                if(isConnected[city][n]==1 && !visited[n]){
+                    dfs(n,isConnected,visited);
+                }
+            }
+        }
+        public int findCircleNum(int[][] isConnected) {
+            int n = isConnected.length;
+            boolean []visited = new boolean[n];
+            int provinces=0;
+            for(int i=0;i<n;i++){
+                if(!visited[i]){
+                    provinces++;
+                    dfs(i,isConnected,visited);
+                }
+            }
+            return provinces;
+        }
+    }
+}
